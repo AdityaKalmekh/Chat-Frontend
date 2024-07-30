@@ -12,8 +12,9 @@ export default function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:1337/api/auth/local', {
-        identifier: email, // Using email as the identifier
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      const response = await axios.post(`${apiUrl}/api/auth/local`, {
+        identifier: email, 
         password,
       });
       localStorage.setItem('token', response.data.jwt);

@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
 export default function ChatRooms() {
-  // const [room, setRoom] = useState('');
   const roomref = useRef(null);
   const router = useRouter();
   
@@ -15,7 +14,8 @@ export default function ChatRooms() {
     if (room){
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:1337/api/rooms/${room}`, {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await axios.get(`${apiUrl}/api/rooms/${room}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },

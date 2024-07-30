@@ -12,10 +12,11 @@ export default function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:1337/api/auth/local/register', {
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+      await axios.post(`${apiUrl}/api/auth/local/register`, {
         username: email,
         password,
-        email, // Using the same email for both username and email fields
+        email, 
       });
       router.push('/login');
     } catch (error) {

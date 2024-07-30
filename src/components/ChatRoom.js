@@ -10,7 +10,8 @@ const ChatRoom = ({ socket, room }) => {
     const fetchMessages = async () => {
       try {
         const token = localStorage.getItem('token');
-        const response = await axios.get(`http://localhost:1337/api/messages?room=${room}`, {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+        const response = await axios.get(`${apiUrl}/api/messages?room=${room}`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -38,8 +39,9 @@ const ChatRoom = ({ socket, room }) => {
     console.log(room);
     if (message) {
       const token = localStorage.getItem('token');
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL;
       const response = await axios.post(
-        'http://localhost:1337/api/messages',
+        `${apiUrl}/api/messages`,
         { data: { content: message, room } },
         {
           headers: {
